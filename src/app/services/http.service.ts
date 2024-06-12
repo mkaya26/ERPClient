@@ -4,11 +4,14 @@ import { api } from '../constants';
 import { ResultModel } from '../models/result.model';
 import { AuthService } from './auth.service';
 import { ErrorService } from './error.service';
+import { ConfigService } from './config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
+
+  private apiUrl: string = "";
 
   constructor(
     private http: HttpClient,
@@ -17,7 +20,8 @@ export class HttpService {
   ) { }
 
   post<T>(apiUrl: string, body: any, callBack: (res: T) => void, errorCallBack?: () => void) {
-    this.http.post<ResultModel<T>>(`${api}/${apiUrl}`, body, {
+    console.log(this.apiUrl);
+    this.http.post<ResultModel<T>>(`${this.apiUrl}/${apiUrl}`, body, {
       headers: {
         "Authorization": "Bearer " + this.auth.token
       }
@@ -34,5 +38,10 @@ export class HttpService {
         }
       }
     })
+  }
+
+  setApiUrl(apiUrl: string) {
+    this.apiUrl = apiUrl;
+    console.log("API URL in MyService:", this.apiUrl);
   }
 }
