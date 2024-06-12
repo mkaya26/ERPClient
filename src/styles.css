@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'LeagueSpartan-Regular';
+    src: url('assets/font/LeagueSpartan-Regular.ttf') format('truetype');
+}
+
 a:hover{
     cursor: pointer;
+}
+
+.hixo-logo{
+    font-family: 'LeagueSpartan-Regular';
+    font-size:larger;
+    color: #f87d31;
+    .hixo-logo-x{
+        color: #770a96;
+    }
 }

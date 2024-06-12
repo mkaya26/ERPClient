@@ -1,9 +1,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a href="/assets/index3.html" class="brand-link">
-    <img src="/assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-      style="opacity: .8">
-    <span class="brand-text font-weight-light">HOXI Erp</span>
+  <a href="#" class="h1" style="margin-left: 15px; padding-top: 30px;">
+    <span class="hixo-logo">
+      <b>hi<span class="hixo-logo-x">X</span>o</b><span class="text-secondary">Erp</span>
+    </span>
   </a>
 
   <!-- Sidebar -->
@@ -21,7 +21,8 @@
     <!-- SidebarSearch Form -->
     <div class="form-inline">
       <div class="input-group">
-        <input class="form-control form-control-sidebar" [(ngModel)]="search" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control form-control-sidebar" [(ngModel)]="search" type="search" placeholder="Search"
+          aria-label="Search">
         <div class="input-group-append">
           <button class="btn btn-sidebar">
             <i class="fas fa-search fa-fw"></i>
@@ -32,41 +33,43 @@
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">   
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         @for(menu of menus |menu:search; track menu){
-          @if(menu.isTitle){
-            <li class="nav-header">{{menu.name}}</li>
-          }@else if(menu.subMenus.length > 0){
+        @if(menu.isTitle){
+        <li class="nav-header">{{menu.name}}</li>
+        }@else if(menu.subMenus.length > 0){
+        <li class="nav-item">
+          <a class="nav-link">
+            <i class="nav-icon {{menu.icon}}"></i>
+            <p>
+              {{menu.name}}
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            @for(subMenu of menu.subMenus; track subMenu){
             <li class="nav-item">
-              <a class="nav-link">
-                <i class="nav-icon {{menu.icon}}"></i>
-                <p>
-                  {{menu.name}}
-                  <i class="right fas fa-angle-left"></i>
-                </p>
+              <a [routerLink]="subMenu.url" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+                class="nav-link">
+                <i class="{{subMenu.icon}} me-2"></i>
+                <p>{{subMenu.name}}</p>
               </a>
-              <ul class="nav nav-treeview">
-                @for(subMenu of menu.subMenus; track subMenu){
-                  <li class="nav-item">
-                    <a [routerLink]="subMenu.url" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link">
-                      <i class="{{subMenu.icon}} me-2"></i>
-                      <p>{{subMenu.name}}</p>
-                    </a>
-                  </li>  
-                }                                 
-              </ul>
             </li>
-          }@else {
-            <li class="nav-item">
-              <a [routerLink]="menu.url" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link">
-                <i class="nav-icon {{menu.icon}}"></i>
-                <p>
-                  {{menu.name}}
-                </p>
-              </a>
-            </li>    
-          }
-        }     
+            }
+          </ul>
+        </li>
+        }@else {
+        <li class="nav-item">
+          <a [routerLink]="menu.url" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}"
+            class="nav-link">
+            <i class="nav-icon {{menu.icon}}"></i>
+            <p>
+              {{menu.name}}
+            </p>
+          </a>
+        </li>
+        }
+        }
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
