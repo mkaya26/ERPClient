@@ -1,0 +1,134 @@
+<app-blank pageName="Reçteler" [routes]="['Reçetler']">
+    <app-section sectionTitle="Reçete Listesi">
+        <div class="form-group row">
+            <div class="col-9">
+                <button class="btn btn-dark" data-toggle="modal" data-target="#createModal">
+                    <i class="fa-solid fa-plus me-1"></i>
+                    Reçete Ekle
+                </button>
+            </div>
+            <div class="col-3">
+                <input [(ngModel)]="search" type="search" class="form-control" placeholder="ara...">
+            </div>
+        </div>
+        <div class="form-group mt-2">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th></th>
+                        <th>Ürün Adı</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (model of models | recipe:search; track model) {
+                    <tr>
+                        <td>{{$index + 1}}</td>
+                        <td>
+                            <button routerLink="/recipe-details/{{model.id}}" class="btn btn-outline-info btn-sm">
+                                <i class="fa-solid fa-d"></i>
+                            </button>
+                        </td>
+                        <td>{{model.product.name}}</td>
+                        <td>
+                            <button (click)="deleteById(model)" class="btn btn-outline-danger btn-sm">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </app-section>
+</app-blank>
+
+<div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Yeni Reçete</h5>
+                <button type="button" #createModalCloseBtn class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form formValidate #createForm="ngForm" autocomplete="off" (ngSubmit)="create(createForm)">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Ürün</label>
+                                <select class="form-control" [(ngModel)]="createModel.productId" name="productId"
+                                    required>
+                                    @for (item of products; track item) {
+                                    <option [value]="item.id">{{item.name}}</option>
+                                    }
+                                </select>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Ürün</label>
+                                    <select class="form-control" [(ngModel)]="detail.productId"
+                                        [ngModelOptions]="{standalone:true}">
+                                        @for (item of products; track item) {
+                                        <option [value]="item.id">{{item.name}}</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <Label>Adet</Label>
+                                    <input class="form-control" [(ngModel)]="detail.quantity" [ngModelOptions]="{standalone:true}"/>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label>İşlemler</label>
+                                    <button (click)="addDetail()" type="button" class="btn btn-dark">Ekle</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mt-2">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Ürün Adı</th>
+                                        <th>Adedi</th>
+                                        <th>İşlemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for(data of createModel.recipeDetails; track data){
+                                        <tr>
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{data.product.name}}</td>
+                                            <td>{{data.quantity}}</td>
+                                            <td>
+                                                <button (click)="removeDetail($index)" type="button" class="btn btn-outline-danger btn-sm">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-dark w-100">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

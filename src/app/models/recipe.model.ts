@@ -5,5 +5,5 @@ export class RecipeModel {
     id: string = "";
     productId: string = "";
     product: ProductModel = new ProductModel();
-    details: RecipeDetailModel[] = [];
+    recipeDetails: RecipeDetailModel[] = [];
 }

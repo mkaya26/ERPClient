@@ -12,6 +12,7 @@ import { ConfigService } from './config.service';
 export class HttpService {
 
   private apiUrl: string = "";
+  private config: any;
 
   constructor(
     private http: HttpClient,
@@ -19,9 +20,13 @@ export class HttpService {
     private error: ErrorService
   ) { }
 
-  post<T>(apiUrl: string, body: any, callBack: (res: T) => void, errorCallBack?: () => void) {
-    console.log(this.apiUrl);
-    this.http.post<ResultModel<T>>(`${this.apiUrl}/${apiUrl}`, body, {
+  async post<T>(apiUrl: string, body: any, callBack: (res: T) => void, errorCallBack?: () => void) {
+    
+    await this.loadConfig();
+    //
+    let baseApiUrl = this.config.apiUrl;
+
+    this.http.post<ResultModel<T>>(`${baseApiUrl}/${apiUrl}`, body, {
       headers: {
         "Authorization": "Bearer " + this.auth.token
       }
@@ -40,8 +45,16 @@ export class HttpService {
     })
   }
 
-  setApiUrl(apiUrl: string) {
-    this.apiUrl = apiUrl;
-    console.log("API URL in MyService:", this.apiUrl);
+  async loadConfig(): Promise<void> {
+    try {
+      this.config = await this.http.get('/assets/config.json').toPromise();
+      console.log(this.config);
+    } catch (error) {
+      console.error('Config loading error:', error);
+    }
+  }
+
+  getConfig(): any {
+    return this.config;
   }
 }

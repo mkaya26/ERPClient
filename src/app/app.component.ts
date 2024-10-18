@@ -7,24 +7,11 @@ import { HttpService } from './services/http.service';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
-  providers:[
-    ConfigService
-  ],
   template: `
   <router-outlet></router-outlet>`
 })
 export class AppComponent implements OnInit {
+  ngOnInit(): void {
 
-  apiUrl: string = "";
-
-  constructor(private configService: ConfigService,private httpService:HttpService) { }
-
-  ngOnInit() {
-    this.configService.apiUrl$.subscribe(apiUrl => {
-      this.apiUrl = apiUrl;
-      console.log("API URL in AppComponent:", this.apiUrl);
-      this.httpService.setApiUrl(apiUrl);
-    });
-    this.configService.loadConfig();
   }
 }

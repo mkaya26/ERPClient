@@ -7,6 +7,8 @@ import { AuthService } from './services/auth.service';
 import { CustomersComponent } from './components/customers/customers.component';
 import { DepotComponent } from './components/depot/depot.component';
 import { ProductComponent } from './components/product/product.component';
+import { RecipeComponent } from './components/recipe/recipe.component';
+import { RecipeDetailsComponent } from './components/recipe-details/recipe-details.component';
 
 export const routes: Routes = [
     {
@@ -33,6 +35,14 @@ export const routes: Routes = [
             {
                 path: "products",
                 component: ProductComponent
+            },
+            {
+                path: "recipes",
+                component: RecipeComponent
+            },
+            {
+                path: "recipe-details/:id",
+                component: RecipeDetailsComponent
             }
         ]
     }
