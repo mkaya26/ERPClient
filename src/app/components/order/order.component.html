@@ -72,9 +72,10 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label>Müşteri</label>
-                                <select class="form-control" name="customer" [(ngModel)]="createModel.customerId">
+                                <select class="form-control" name="customer" [(ngModel)]="createModel.customerId"
+                                 required>
                                     @for (item of customers; track $index) {
-                                        <option value=""></option>
+                                        <option [value]="item.id">{{item.name}}</option>
                                     }
                                 </select>
                                 <div class="invalid-feedback"></div>
@@ -82,32 +83,84 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="form-group">
-                                <label>Şehir</label>
-                                <input type="text" [(ngModel)]="createModel.city" required minlength="3"
-                                    class="form-control" name="city">
+                                <label>Teslim Tarihi</label>
+                                <input type="date" [(ngModel)]="createModel.deliveryDate" required
+                                    class="form-control" name="deliveryDate">
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
-                        <div class="col-6">
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-3">
                             <div class="form-group">
-                                <label>İlçe</label>
-                                <input type="text" [(ngModel)]="createModel.town" required minlength="3"
-                                    class="form-control" name="town">
-                                <div class="invalid-feedback"></div>
+                                <label>Ürün</label>
+                                <select class="form-control" [(ngModel)]="detail.productId" [ngModelOptions]="{standalone:true}">
+                                    @for (item of products; track item) {
+                                        <option [value]="item.id">{{item.name}}</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Adet</label>
+                                <input class="form-control" [(ngModel)]="detail.quantity" 
+                                 [ngModelOptions]="{standalone:true}">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Birim Ücreti</label>
+                                <input class="form-control" [(ngModel)]="detail.price" 
+                                 [ngModelOptions]="{standalone:true}">
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Toplam</label>
+                                <br>
+                                <label>{{detail.price * detail.quantity}}</label>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <div class="form-group">
-                                <label>Açık Adres</label>
-                                <textarea class="form-control" [(ngModel)]="createModel.fullAddress" minlength="3"
-                                    rows="3" name="fullAddress"></textarea>
-                                <div class="invalid-feedback"></div>
-                            </div>
+                            <button type="button" class="btn btn-dark" (click)="addDetail()">Ekle</button>
                         </div>
+                    </div>
+                    <div class="row">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Ürün Adı</th>
+                                    <th>Adedi</th>
+                                    <th>Birim Fiyatı</th>
+                                    <th>Toplam</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (item of createModel.orderDetails; track item) {
+                                    <tr>
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{item.product.name}}</td>
+                                        <td>{{item.quantity}}</td>
+                                        <td>{{item.price}}</td>
+                                        <td>{{item.price * item.quantity}}</td>
+                                        <td>
+                                            <button (click)="removeDetail($index)"
+                                             class="btn btn-outline-danger btn-sm">
+                                             <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -129,44 +182,7 @@
             </div>
             <form formValidate #updateForm="ngForm" autocomplete="off" (ngSubmit)="update(updateForm)">
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Depo Adı</label>
-                                <input type="text" [(ngModel)]="updateModel.name" required minlength="3"
-                                    class="form-control" name="name">
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>Şehir</label>
-                                <input type="text" [(ngModel)]="updateModel.city" required minlength="3"
-                                    class="form-control" name="city">
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label>İlçe</label>
-                                <input type="text" [(ngModel)]="updateModel.town" required minlength="3"
-                                    class="form-control" name="town">
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Açık Adres</label>
-                                <textarea class="form-control" [(ngModel)]="updateModel.fullAddress" minlength="3"
-                                    rows="3" name="fullAddress"></textarea>
-                                <div class="invalid-feedback"></div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary w-100">Güncelle</button>

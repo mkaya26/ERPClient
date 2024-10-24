@@ -7,6 +7,7 @@ import { SwallService } from '../../services/swall.service';
 import { NgForm } from '@angular/forms';
 import { CustomerModel } from '../../models/customer.model';
 import { ProductModel } from '../../models/product.model';
+import { OrderDetailModel } from '../../models/order-detail.model';
 
 @Component({
   selector: 'app-order',
@@ -21,6 +22,7 @@ export class OrderComponent {
   models: OrderModel[] = [];
   customers: CustomerModel[] = [];
   products: ProductModel[] = [];
+  detail: OrderDetailModel = new OrderDetailModel();
   createModel: OrderModel = new OrderModel();
   updateModel: OrderModel = new OrderModel();
 
@@ -79,5 +81,14 @@ export class OrderComponent {
         this.getList();
       });
     }
+  }
+
+  addDetail(){
+    this.createModel.orderDetails.push(this.detail);
+    this.detail = new OrderDetailModel();
+  }
+
+  removeDetail(index:number){
+    this.createModel.orderDetails.splice(index,1);
   }
 }
