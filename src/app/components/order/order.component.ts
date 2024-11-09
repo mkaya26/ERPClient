@@ -25,6 +25,7 @@ export class OrderComponent {
   customers: CustomerModel[] = [];
   products: ProductModel[] = [];
   detail: OrderDetailModel = new OrderDetailModel();
+  updateDetail: OrderDetailModel = new OrderDetailModel();
   createModel: OrderModel = new OrderModel();
   updateModel: OrderModel = new OrderModel();
 
@@ -110,7 +111,22 @@ export class OrderComponent {
     this.detail = new OrderDetailModel();
   }
 
+  addUpdateDetail(){
+    const product = this.products.find(p => p.id == this.updateDetail.productId);
+    //
+    if(product){
+      this.updateDetail.product = product;
+    }
+    //
+    this.updateModel.orderDetails.push(this.updateDetail);
+    this.updateDetail = new OrderDetailModel();
+  }
+
   removeDetail(index:number){
     this.createModel.orderDetails.splice(index,1);
+  }
+
+  updateDetailRemove(index:number){
+    this.updateModel.orderDetails.splice(index,1);
   }
 }
