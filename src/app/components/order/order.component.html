@@ -20,6 +20,7 @@
                         <th>Sip. No</th>
                         <th>Müşteri</th>
                         <th>Tes. Tar.</th>
+                        <th>Durum</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -27,10 +28,11 @@
                     @for (model of models | order:search; track model) {
                     <tr>
                         <td>{{$index + 1}}</td>
-                        <td>{{model.orderDate}}</td>
+                        <td>{{model.orderDate | date:'dd.MM.yyyy'}}</td>
                         <td>{{model.orderNumberFull}}</td>
                         <td>{{model.customer.name}}</td>
-                        <td>{{model.deliveryDate}}</td>
+                        <td>{{model.deliveryDate | date:'dd.MM.yyyy'}}</td>
+                        <td>{{model.status.name}}</td>
                         <td>
                             <button (click)="get(model)" data-toggle="modal" data-target="#updateModal"
                                 class="btn btn-outline-primary btn-sm">
@@ -48,7 +50,7 @@
 </app-blank>
 
 <div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Yeni Sipariş</h5>
@@ -107,14 +109,14 @@
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Adet</label>
-                                <input class="form-control" [(ngModel)]="detail.quantity" 
+                                <input type="number" class="form-control" [(ngModel)]="detail.quantity" 
                                  [ngModelOptions]="{standalone:true}">
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Birim Ücreti</label>
-                                <input class="form-control" [(ngModel)]="detail.price" 
+                                <input type="number" class="form-control" [(ngModel)]="detail.price" 
                                  [ngModelOptions]="{standalone:true}">
                             </div>
                         </div>
