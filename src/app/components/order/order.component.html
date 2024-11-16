@@ -34,7 +34,9 @@
                         <td>{{model.deliveryDate | date:'dd.MM.yyyy'}}</td>
                         <td>{{model.status.name}}</td>
                         <td>
-                            <button (click)="get(model)" data-toggle="modal" data-target="#updateModal"
+                            <a class="btn btn-outline-dark btn-sm" href="requirements-planning/{{model.id}}" target="_blank">
+                                <i class="fa-solid fa-list"></i>
+                            </a>|<button (click)="get(model)" data-toggle="modal" data-target="#updateModal"
                                 class="btn btn-outline-primary btn-sm">
                                 <i class="fa-solid fa-edit"></i>
                             </button>|<button (click)="deleteById(model)" class="btn btn-outline-danger btn-sm">

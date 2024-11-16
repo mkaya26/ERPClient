@@ -1,0 +1,26 @@
+<div class="container">
+    <b style="float: right;">Tarih: {{model.date | date:'dd.MM.yyyy'}}</b>
+    <br>
+    <h1 class="text-center">{{model.title}}</h1>
+    <hr>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Ürün Adı</th>
+                <th>Ürün Adedi</th>
+                <th>Not</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (item of model.products; track item) {
+            <tr>
+                <td>{{$index + 1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.quantity}}</td>
+                <td></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
