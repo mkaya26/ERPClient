@@ -19,12 +19,13 @@ export const routes: Routes = [
     },
     {
         path: "requirements-planning/:orderId",
-        component: RequirementsPlanningComponent
+        component: RequirementsPlanningComponent,
+        canActivate: [() => inject(AuthService).isAuthenticated()]
     },
     {
         path: "",
         component: LayoutsComponent,
-        canActivateChild: [()=> inject(AuthService).isAuthenticated()],
+        canActivateChild: [() => inject(AuthService).isAuthenticated()],
         children: [
             {
                 path: "",
