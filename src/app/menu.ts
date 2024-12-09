@@ -56,5 +56,27 @@ export const Menus: MenuModel[] = [
         url:"/orders",
         isTitle:false,
         subMenus:[]
+    },
+    {
+        name: "Faturalar",
+        icon: "fa fa-solid fa-file-invoice",
+        url:"",
+        isTitle:false,
+        subMenus:[
+            {
+                name: " Alış Faturaları",
+                icon: "fa fa-solid fa-file-invoice",
+                url:"/invoices/1",
+                isTitle:false,
+                subMenus:[]
+            },
+            {
+                name: " Satış Faturaları",
+                icon: "fa fa-solid fa-file-invoice",
+                url:"/invoices/2",
+                isTitle:false,
+                subMenus:[]
+            }
+        ]
     }
 ]

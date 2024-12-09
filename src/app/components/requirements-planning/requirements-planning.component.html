@@ -3,26 +3,32 @@
     <br>
     <h1 class="text-center">{{model.title}}</h1>
     <hr>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Ürün Adı</th>
-                <th>Ürün Adedi</th>
-                <th>Not</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (item of model.products; track item) {
-            <tr>
-                <td>{{$index + 1}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.quantity}}</td>
-                <td>
-                    <input type="text" class="form-control"/>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </table>
+    @if (model.products.length > 0) {
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Adedi</th>
+                    <th>Not</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of model.products; track item) {
+                <tr>
+                    <td>{{$index + 1}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>
+                        <input type="text" class="form-control"/>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }@else {
+        <h3 class="alert alert-success text-center">
+            Bu siparişin üretimi için yeterli malzeme var.
+        </h3>
+    }
 </div>
