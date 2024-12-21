@@ -12,6 +12,7 @@ import { RecipeDetailsComponent } from './components/recipe-details/recipe-detai
 import { OrderComponent } from './components/order/order.component';
 import { RequirementsPlanningComponent } from './components/requirements-planning/requirements-planning.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
+import { ProductionComponent } from './components/production/production.component';
 
 export const routes: Routes = [
     {
@@ -59,6 +60,10 @@ export const routes: Routes = [
             {
                 path: "invoices/:type",
                 component: InvoiceComponent
+            },
+            {
+                path: "production",
+                component: ProductionComponent
             }
         ]
     }

@@ -78,5 +78,13 @@ export const Menus: MenuModel[] = [
                 subMenus:[]
             }
         ]
+    },
+    {
+        name: "Üretim",
+        icon: "fa-solid fa-screwdriver-wrench",
+        url:"/production",
+        isTitle:false,
+        subMenus:[]
     }
+    //<i class=""></i>
 ]
