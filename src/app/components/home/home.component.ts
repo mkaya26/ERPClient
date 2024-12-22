@@ -10,4 +10,13 @@ import { SharedModule } from '../../modules/shared.module';
 })
 export class HomeComponent {
 
+  ngOnInit() {
+    if (!localStorage.getItem('isReloaded')) {
+      localStorage.setItem('isReloaded', 'true');
+      window.location.reload();
+    } else {
+      localStorage.removeItem('isReloaded');
+    }
+  }
+  
 }
