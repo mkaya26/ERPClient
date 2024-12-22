@@ -13,6 +13,7 @@ import { OrderComponent } from './components/order/order.component';
 import { RequirementsPlanningComponent } from './components/requirements-planning/requirements-planning.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { ProductionComponent } from './components/production/production.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 export const routes: Routes = [
     {
@@ -64,6 +65,10 @@ export const routes: Routes = [
             {
                 path: "production",
                 component: ProductionComponent
+            },
+            {
+                path: "user-profile",
+                component: UserProfileComponent
             }
         ]
     }

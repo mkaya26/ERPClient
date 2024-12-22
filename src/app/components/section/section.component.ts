@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './section.component.css'
 })
 export class SectionComponent {
-@Input() sectionTitle:string ="";
+  @Input() sectionTitle: string = "";
+  @Input() sectionHeaderButtonVisible: boolean = true;
 }

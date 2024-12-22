@@ -1,0 +1,60 @@
+<app-blank pageName="Profil" [routes]="['Profilim']">
+    <div class="row">
+        <div class="col-6">
+            <app-section sectionTitle="Bilgilerim" [sectionHeaderButtonVisible]="false">
+                <form formValidate #updateForm="ngForm" autocomplete="off" (ngSubmit)="update(updateForm)">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Ad</label>
+                                <input type="text" class="form-control" [(ngModel)]="model.firstName" name="firstName" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Soyad</label>
+                                <input type="text" class="form-control" [(ngModel)]="model.lastName" name="lastName" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Kullanıcı Adı</label>
+                                <input type="text" class="form-control" [(ngModel)]="model.userName" name="userName" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>E-Mail</label>
+                                <input type="text" class="form-control" [(ngModel)]="model.email" name="email" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Güncelle</button>
+                </form>
+            </app-section>
+        </div>
+        <div class="col-6">
+            <app-section sectionTitle="Şifre Değiştir" [sectionHeaderButtonVisible]="false">
+                <form formValidate #passwordChangeForm="ngForm" autocomplete="off" (ngSubmit)="passwordChange(passwordChangeForm)">
+                    <div class="form-group">
+                        <label>Eski Parola</label>
+                        <input type="password" class="form-control" [(ngModel)]="passwordModel.oldPassword" name="oldPassword" required>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Yeni Parola</label>
+                        <input type="password" class="form-control" [(ngModel)]="passwordModel.newPassword" name="newPassword" required>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-block">Parola Değiştir</button>
+                </form>
+            </app-section>
+        </div>
+    </div>
+</app-blank>
