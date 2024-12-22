@@ -85,6 +85,20 @@ export const Menus: MenuModel[] = [
         url:"/production",
         isTitle:false,
         subMenus:[]
+    },
+    {
+        name: "Yönetim",
+        icon: "fa-solid fa-gear",
+        url:"",
+        isTitle:false,
+        subMenus:[
+            {
+                name:"Kullanıcılar",
+                icon:"fa-solid fa-users",
+                url:"/users",
+                isTitle:false,
+                subMenus:[]
+            }
+        ]
     }
-    //<i class=""></i>
 ]

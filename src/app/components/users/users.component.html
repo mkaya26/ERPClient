@@ -1,0 +1,196 @@
+<app-blank [pageName]="pageName" [routes]="[pageName]">
+    <app-section [sectionTitle]="pageName">
+        <div class="form-group row">
+            <div class="col-9">
+                <button class="btn btn-dark" data-toggle="modal" data-target="#createModal">
+                    <i class="fa-solid fa-plus me-1"></i>
+                    Kullanıcı Ekle
+                </button>
+            </div>
+            <div class="col-3">
+                <input [(ngModel)]="search" type="search" class="form-control" placeholder="ara...">
+            </div>
+        </div>
+        <div class="form-group mt-2">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Ad Soyad</th>
+                        <th>Kullanıcı Adı</th>
+                        <th>E-Mail</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (model of models | user:search; track model) {
+                    <tr>
+                        <td>{{$index + 1}}</td>
+                        <td>{{model.fullName}}</td>
+                        <td>{{model.userName}}</td>
+                        <td>{{model.email}}</td>
+                        <td>
+                            <button (click)="get(model)" data-toggle="modal" data-target="#updateModal"
+                                class="btn btn-outline-primary btn-sm">
+                                <i class="fa-solid fa-edit"></i>
+                            </button>|<button (click)="deleteById(model.id)" class="btn btn-outline-danger btn-sm">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </app-section>
+</app-blank>
+
+<div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Yeni Kullanıcı Ekle</h5>
+                <button type="button" #createModalCloseBtn class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form formValidate #createForm="ngForm" autocomplete="off" (ngSubmit)="create(createForm)">
+                <div class="modal-body">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-add-tab" role="tablist">
+                            <button class="nav-link active" id="nav-add-information-tab" data-toggle="tab"
+                                data-target="#nav-add-information" type="button" role="tab"
+                                aria-controls="nav-add-information" aria-selected="true">
+                                Bilgiler
+                            </button>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-add-tabContent">
+                        <div class="tab-pane fade show active" id="nav-add-information" role="tabpanel"
+                            aria-labelledby="nav-add-information-tab">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Ad</label>
+                                        <input type="text" required [(ngModel)]="createModel.firstName"
+                                            class="form-control" name="firstName">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Soyad</label>
+                                        <input type="text" required [(ngModel)]="createModel.lastName"
+                                            class="form-control" name="lastName">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Kullanıcı Adı</label>
+                                        <input type="text" required [(ngModel)]="createModel.userName"
+                                            class="form-control" name="userName">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="text" required [(ngModel)]="createModel.email" class="form-control"
+                                            name="email">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Parola</label>
+                                        <input type="password" required [(ngModel)]="createModel.password"
+                                            class="form-control" name="password">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-dark w-100">Kaydet</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Kullanıcı Güncelle</h5>
+                <button type="button" #updateModalCloseBtn class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form formValidate #updateForm="ngForm" autocomplete="off" (ngSubmit)="update(updateForm)">
+                <div class="modal-body">
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-update-tab" role="tablist">
+                            <button class="nav-link active" id="nav-update-information-tab" data-toggle="tab"
+                                data-target="#nav-update-information" type="button" role="tab"
+                                aria-controls="nav-update-information" aria-selected="true">
+                                Bilgiler
+                            </button>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-update-tabContent">
+                        <div class="tab-pane fade show active" id="nav-update-information" role="tabpanel"
+                            aria-labelledby="nav-update-information-tab">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Ad</label>
+                                        <input type="text" required [(ngModel)]="updateModel.firstName"
+                                            class="form-control" name="updateFirstName">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Soyad</label>
+                                        <input type="text" required [(ngModel)]="updateModel.lastName"
+                                            class="form-control" name="updateLastName">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Kullanıcı Adı</label>
+                                        <input type="text" required [(ngModel)]="updateModel.userName"
+                                            class="form-control" name="updateUserName">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="text" required [(ngModel)]="updateModel.email" class="form-control"
+                                            name="updateEmail">
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary w-100">Güncelle</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

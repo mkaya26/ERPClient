@@ -6,4 +6,5 @@ export class UserModel {
     firstName: string = "";
     lastName: string = "";
     fullName: string = "";
+    password: string = "";
 }
