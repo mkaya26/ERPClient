@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
+  isLoading:boolean = false;
   model: LoginModel = new LoginModel();
 
   constructor(
@@ -22,9 +23,10 @@ export class LoginComponent {
   ) { }
 
   signIn() {
+    this.isLoading = true;
     this.http.post<LoginResponseModel>("Auth/Login", this.model, (res) => {
       localStorage.setItem("token", res.token);
       this.router.navigateByUrl("/");
-    });
+    },() => this.isLoading = false);
   }
 }

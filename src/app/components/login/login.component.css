@@ -1,0 +1,28 @@
+.login-row {
+    display: flex;
+    width: 100%;
+    height: 100vh; /* Ekranın tamamını kapla */
+}
+
+.login-part-1 {
+    flex: 1; /* 1 birim alan kaplar */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-part-1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.login-part-2 {
+    flex: 0 0 33.3333%; /* %33.33 genişlik */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

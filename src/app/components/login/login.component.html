@@ -1,4 +1,4 @@
-<body class="hold-transition login-page">
+<!-- <body class="hold-transition login-page">
     <div class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
@@ -30,4 +30,49 @@
             </div>
         </div>
     </div>
-</body>
+</body> -->
+<div class="hold-transition login-div">
+    <div class="row login-row">
+        <div class="col-md-8 login-part-1">
+            <img src="/assets/login-image.jpg">
+        </div>
+        <div class="col-md-4 login-part-2">
+            <h1 class="text-center">
+                <span class="hixo-logo">
+                    <b>hi<span class="hixo-logo-x">X</span>o</b><span class="text-dark">ERP</span>
+                </span>
+            </h1>
+            
+            <p class="login-box-msg">Giriş yapmak için bilgilerinizi doldurun</p>
+            
+            <div class="input-group mb-3">
+                <input [(ngModel)]="model.emailOrUserName" type="email" class="form-control" placeholder="Email">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <input [(ngModel)]="model.password" type="password" class="form-control" placeholder="Password">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
+            </div>
+            
+            @if(!isLoading){
+                <button (click)="signIn()" class="btn btn-dark btn-block">
+                    <i class="fa-solid fa-lock me-1"></i>
+                    Giriş Yap
+                </button>
+            }@else {
+                <button class="btn btn-dark btn-block" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm me-1" aria-hidden="true"></span>
+                    <span role="status">Giriş yapılıyor...</span>
+                </button>
+            }
+        </div>
+    </div>
+</div>
