@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { DepotModel } from '../../models/depot.model';
 import { ActivatedRoute } from '@angular/router';
+import { OrderModel, OrderStatusEnum } from '../../models/order.model';
 
 @Component({
   selector: 'app-invoice',
@@ -33,6 +34,10 @@ export class InvoiceComponent {
   updateModel: InvoiceModel = new InvoiceModel();
   type: number = 1;
   pageName: string = "Alış Faturaları";
+
+  orders: OrderModel[] = [];
+  customerOrders: OrderModel[] = [];
+
   @ViewChild("createModalCloseBtn") createModalClose: ElementRef<HTMLButtonElement> | undefined;
   @ViewChild("updateModalCloseBtn") updateModalClose: ElementRef<HTMLButtonElement> | undefined;
 
@@ -55,6 +60,7 @@ export class InvoiceComponent {
       this.getProductList();
       this.getCustomerList();
       this.getDepotList();
+      this.getOrderList();
     });
 
   }
@@ -62,6 +68,12 @@ export class InvoiceComponent {
   getList() {
     this.http.post<InvoiceModel[]>("Invoice/GetAll", { type: this.type }, (res) => {
       this.models = res;
+    });
+  }
+
+  getOrderList() {
+    this.http.post<OrderModel[]>("Order/GetAll", {}, (res) => {
+      this.orders = res.filter(f => f.status.value < 3);
     });
   }
 
@@ -159,5 +171,13 @@ export class InvoiceComponent {
 
   updateDetailRemove(index: number) {
     this.updateModel.invoiceDetails.splice(index, 1);
+  }
+
+  setCustomerOrders(form:number){
+    if(form==1){
+      this.customerOrders = this.orders.filter(f => f.customerId == this.createModel.customerId);
+    }else{
+      this.customerOrders = this.orders.filter(f => f.customerId == this.updateModel.customerId);
+    }
   }
 }

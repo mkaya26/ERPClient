@@ -18,6 +18,7 @@
                         <th>#</th>
                         <th>Ürün Adı</th>
                         <th>Ürün Tipi</th>
+                        <th>Stok Miktarı</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -27,6 +28,7 @@
                         <td>{{$index + 1}}</td>
                         <td>{{model.name}}</td>
                         <td>{{model.type.name}}</td>
+                        <td>{{model.quantity}}</td>
                         <td>
                             <button (click)="get(model)" data-toggle="modal" data-target="#updateModal"
                                 class="btn btn-outline-primary btn-sm">

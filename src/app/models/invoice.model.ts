@@ -8,8 +8,9 @@ export class InvoiceModel {
     customer: CustomerModel = new CustomerModel();
     invoiceDate: string = "";
     invoiceType: InvoiceTypeEnum = new InvoiceTypeEnum();
-    invoiceTypeValue:number = 1;
+    invoiceTypeValue: number = 1;
     invoiceDetails: InvoiceDetailModel[] = [];
+    orderId: string = "";
 }
 
 export class InvoiceTypeEnum {

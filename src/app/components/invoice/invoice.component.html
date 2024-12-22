@@ -75,10 +75,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="{{type == 2 ? 'col-6' : 'col-12'}} ">
                             <div class="form-group">
                                 <label>Müşteri</label>
-                                <select class="form-control" name="customer" [(ngModel)]="createModel.customerId"
+                                <select class="form-control" (change)="setCustomerOrders(1)" name="customer" [(ngModel)]="createModel.customerId"
                                  required>
                                     @for (item of customers; track $index) {
                                         <option [value]="item.id">{{item.name}}</option>
@@ -87,6 +87,19 @@
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
+                        @if (type == 2) {
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Sipariş</label>
+                                    <select class="form-control" name="createOrderId" [(ngModel)]="createModel.orderId"
+                                     >
+                                        @for (item of customerOrders; track $index) {
+                                            <option [value]="item.id">{{item.orderNumberFull}}</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        }
                     </div>
                     <hr>
                     <div class="row">
@@ -209,10 +222,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="{{type == 2 ? 'col-6' : 'col-12'}} ">
                             <div class="form-group">
                                 <label>Müşteri</label>
-                                <select class="form-control" name="updateModelCustomer" [(ngModel)]="updateModel.customerId"
+                                <select class="form-control" name="updateModelCustomer" (change)="setCustomerOrders(2)" [(ngModel)]="updateModel.customerId"
                                  required>
                                     @for (item of customers; track $index) {
                                         <option [value]="item.id">{{item.name}}</option>
@@ -221,6 +234,19 @@
                                 <div class="invalid-feedback"></div>
                             </div>
                         </div>
+                        @if (type == 2) {
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Sipariş</label>
+                                    <select class="form-control" name="updateModelOrderId" [(ngModel)]="updateModel.orderId"
+                                     >
+                                        @for (item of customerOrders; track $index) {
+                                            <option [value]="item.id">{{item.orderNumberFull}}</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        }
                     </div>
                     <hr>
                     <div class="row">
